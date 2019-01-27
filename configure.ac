@@ -1,6 +1,6 @@
 AC_INIT([librlog],[0.0.1],[palvarez@ritho.net])
 AC_PREREQ([2.69])
-AC_CONFIG_SRCDIR([src/mem.c])
+AC_CONFIG_SRCDIR([src/log.c])
 AC_CONFIG_AUX_DIR([.build-aux])
 dnl AC_CONFIG_SUBDIRS([subdir])
 AM_INIT_AUTOMAKE([foreign -Wall -Werror dist-bzip2 subdir-objects])
@@ -26,8 +26,10 @@ dnl Check libraries
 PKG_CHECK_MODULES([CHECK], [check >= 0.10.0])
 
 dnl Checking headers 
+AC_CHECK_HEADERS([stdio.h])
 AC_CHECK_HEADERS([stdlib.h])
 AC_CHECK_HEADERS([unistd.h])
+AC_CHECK_HEADERS([stdarg.h])
 AC_CHECK_HEADER_STDBOOL
 AC_HEADER_STDC
 
