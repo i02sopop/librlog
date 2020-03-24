@@ -21,6 +21,7 @@
 
 void xwarn(const char *fmt, ...);
 void xerror(const char *fmt, ...);
+void xlog(const char *fmt, ...);
 void xprintf(const char *fmt, ...);
 
 #endif // __LIBRLOG_H__

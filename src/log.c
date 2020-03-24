@@ -53,3 +53,14 @@ xprintf(const char *fmt, ...) {
 	vdprintf(out, fmt, ap);
 	va_end(ap);
 }
+
+
+void
+xlog(const char *fmt, ...) {
+	va_list ap;
+	int out = dup(1);
+
+	va_start(ap, fmt);
+	vdprintf(out, fmt, ap);
+	va_end(ap);
+}
