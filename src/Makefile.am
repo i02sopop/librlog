@@ -12,4 +12,4 @@ include_HEADERS=$(INCLUDE_DIR)/librlog.h
 
 .PHONY: check-syntax
 check-syntax:
-	gcc -o nul ${AM_CFLAGS} ${c_project_CFLAGS} -S ${CHK_SOURCES}
+	gcc -o nul ${AM_CFLAGS} ${librlog_la_CFLAGS} -S ${CHK_SOURCES}
