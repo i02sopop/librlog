@@ -1,4 +1,4 @@
-AC_INIT([librlog],[0.0.1],[palvarez@ritho.net])
+AC_INIT([librlog],[0.0.2],[palvarez@ritho.net])
 AC_PREREQ([2.69])
 AC_CONFIG_SRCDIR([src/log.c])
 AC_CONFIG_AUX_DIR([.build-aux])
@@ -18,12 +18,14 @@ AM_PROG_AR
 AC_PROG_INSTALL
 AC_PROG_MAKE_SET
 
+AC_CHECK_TOOL([VALGRIND], [valgrind])
+
 dnl LIBTOOL macros
 LT_INIT
 AC_SUBST([LIBTOOL_DEPS])
 
 dnl Check libraries
-PKG_CHECK_MODULES([CHECK], [check >= 0.10.0])
+PKG_CHECK_MODULES([CHECK], [check >= 0.15.2])
 
 dnl Checking headers 
 AC_CHECK_HEADERS([stdio.h])

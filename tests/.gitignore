@@ -1,5 +1,7 @@
 /.deps/
+/.libs/
 /Makefile
 /Makefile.in
-/check_c_project*
-/test-suite.log
+/*.log
+/check_librlog
+/*.o
