@@ -1,5 +1,5 @@
 /*********************************************************************************
- * Copyright (c) 2019 librlog project (see AUTHORS)                              *
+ * Copyright (c) 2019-2022 librlog project (see AUTHORS)                         *
  *                                                                               *
  * This file is part of librlog.                                                 *
  *                                                                               *
@@ -24,7 +24,12 @@
 #include <librlog.h>
 
 void
-xwarn(const char *fmt, ...) {
+xwarn(const char *str) {
+	xwarnf(str);
+}
+
+void
+xwarnf(const char *fmt, ...) {
 	va_list ap;
 	int out = dup(2);
 
@@ -33,15 +38,24 @@ xwarn(const char *fmt, ...) {
 	va_end(ap);
 }
 
+void
+xerror(const char *str) {
+	xerrorf(str);
+}
 
 void
-xerror(const char *fmt, ...) {
+xerrorf(const char *fmt, ...) {
 	va_list ap;
 	int out = dup(2);
 
 	va_start(ap, fmt);
 	vdprintf(out, fmt, ap);
 	va_end(ap);
+}
+
+void
+xprint(const char *str) {
+	xprintf(str);
 }
 
 void
@@ -54,13 +68,33 @@ xprintf(const char *fmt, ...) {
 	va_end(ap);
 }
 
+void
+xlog(const char *str) {
+	xlogf(str);
+}
 
 void
-xlog(const char *fmt, ...) {
+xlogf(const char *fmt, ...) {
 	va_list ap;
 	int out = dup(1);
 
 	va_start(ap, fmt);
 	vdprintf(out, fmt, ap);
 	va_end(ap);
+}
+
+void
+xfatal(const char *str) {
+	xfatalf(str);
+}
+
+void
+xfatalf(const char *fmt, ...) {
+	va_list ap;
+	int out = dup(1);
+
+	va_start(ap, fmt);
+	vdprintf(out, fmt, ap);
+	va_end(ap);
+	exit(-1);
 }
