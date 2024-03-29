@@ -1,5 +1,5 @@
 /*********************************************************************************
- * Copyright (c) 2019-2022 librlog project (see AUTHORS)                         *
+ * Copyright (c) 2019-2024 librlog project (see AUTHORS)                         *
  *                                                                               *
  * This file is part of librlog.                                                 *
  *                                                                               *
@@ -20,31 +20,33 @@
 #include <check.h>
 #include <librlog.h>
 
+const int logArgument = 5;
+
 START_TEST (test_warn)
 {
 	xwarn("lolailo\n");
-	xwarnf("lolailo %d\n", 5);
+	xwarnf("lolailo %d\n", logArgument);
 }
 END_TEST
 
 START_TEST (test_error)
 {
 	xerror("lerele\n");
-	xerrorf("lerele %d\n", 5);
+	xerrorf("lerele %d\n", logArgument);
 }
 END_TEST
 
 START_TEST (test_log)
 {
 	xlog("lerele\n");
-	xlogf("lerele %d\n", 5);
+	xlogf("lerele %d\n", logArgument);
 }
 END_TEST
 
 START_TEST (test_print)
 {
 	xprint("lerele\n");
-	xprintf("lerele %d\n", 5);
+	xprintf("lerele %d\n", logArgument);
 }
 END_TEST
 
@@ -82,4 +84,3 @@ main() {
 
  return (number_failed == 0) ? EXIT_SUCCESS : EXIT_FAILURE;
 }
-

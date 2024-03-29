@@ -1,5 +1,5 @@
 /*********************************************************************************
- * Copyright (c) 2019-2022 librlog project (see AUTHORS)                         *
+ * Copyright (c) 2019-2024 librlog project (see AUTHORS)                         *
  *                                                                               *
  * This file is part of librlog.                                                 *
  *                                                                               *
@@ -20,8 +20,25 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <stdarg.h>
+#include <string.h>
 
 #include <librlog.h>
+
+const char *
+prefix(const char *prefix, const char *msg) {
+	int pLen = strlen(prefix);
+	int mLen = strlen(msg);
+
+	char *out = malloc((pLen+mLen+1)*sizeof(char));
+	if (out == NULL) {
+		return msg;
+	}
+
+	strcpy(out, prefix);
+	strcat(out, msg);
+
+	return out;
+}
 
 void
 xwarn(const char *str) {
@@ -34,7 +51,7 @@ xwarnf(const char *fmt, ...) {
 	int out = dup(2);
 
 	va_start(ap, fmt);
-	vdprintf(out, fmt, ap);
+	vdprintf(out, prefix("W: \0", fmt), ap);
 	va_end(ap);
 }
 
@@ -49,7 +66,7 @@ xerrorf(const char *fmt, ...) {
 	int out = dup(2);
 
 	va_start(ap, fmt);
-	vdprintf(out, fmt, ap);
+	vdprintf(out, prefix("E: \0", fmt), ap);
 	va_end(ap);
 }
 
@@ -94,7 +111,8 @@ xfatalf(const char *fmt, ...) {
 	int out = dup(1);
 
 	va_start(ap, fmt);
-	vdprintf(out, fmt, ap);
+	vdprintf(out, prefix("F: \0", fmt), ap);
 	va_end(ap);
+
 	exit(-1);
 }
